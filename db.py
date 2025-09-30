@@ -1,6 +1,5 @@
 import psycopg2 as pg
-#pip install psycopg2
-#pip install dotenv
+
 from dotenv import load_dotenv
 import os
 
@@ -8,9 +7,20 @@ import os
 load_dotenv()
 
 params = {
-    "db_name": os.getenv("db_name"),
+    "dbname": os.getenv("DB_NAME"),
     "user": os.getenv("DB_USER"),
     "password": os.getenv("DB_PASSWORD"),
     "host": os.getenv("DB_HOST"),
     "port": os.getenv("DB_PORT"),
 }
+
+def conectar():
+    try:
+        conexao = pg.connect(**params)
+        cursor = conexao.cursor()
+        return conexao,cursor
+    except Exception as erro:
+        print(f"erro de conexao {erro}")
+    return None,None
+
+ 
