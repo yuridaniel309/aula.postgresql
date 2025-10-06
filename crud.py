@@ -30,4 +30,19 @@ def atualiza_idade(id_aluno, nova_idade):
         finally:
             cursor.close()
             conexao.close()
-
+ 
+def deletar_alunos(id_aluno):
+    conexao,cursor = conectar()
+    if conexao:
+        try:
+            cursor.execute(
+                "DELETE FROM alunos WHERW id = %s",
+                (id_aluno,)
+            )
+            conexao.commit()
+        except Exception as erro: 
+            print(f"erro ao tentar atualizar a idade {erro}")
+        finally:
+            cursor.close()
+            conexao.close()
+ 
